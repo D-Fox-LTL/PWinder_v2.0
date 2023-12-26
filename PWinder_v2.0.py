@@ -11,9 +11,7 @@ intCheck: int = 0
 numberOfPasswds: int = 0
 filtered_pw = []
 showNumberOfPasswds: str = ""       #y or n 
-keepOpen: bool = True
-numberOfPasswdsToScan: int = 1_000_000
-batchScan: int = 0
+keepOpen: bool = True 
 
 
 def CountLetters(wordList, position):
@@ -57,7 +55,7 @@ while(keepOpen):
         sys.exit()
 
     try:
-        with open(strPath, "r", encoding="utf8") as file:
+        with open(strPath, "r", encoding="utf8") as file:        #encoding set because of some chars (rockyou.txt didn't work)
             for line in file:
                 # Split the line into words and add them to the list
                 if len(line) == intPW+1:
@@ -104,7 +102,7 @@ while(keepOpen):
 
     intCheck = 0
 
-    while(intCheck!=intPW):
+    while(intCheck!=intPW):        #should filter and print letters in descenting order but doesn't work for some reason... still shows in alphabetical order lmao
         # Count occurrences of first letters
         letterOccurrences = CountLetters(lsPW, intCheck)
     
