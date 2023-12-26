@@ -12,10 +12,11 @@ strPath: str = ""
 intCheck: int = 0
 numberOfPasswds: int = 0
 filtered_pw = []
+showNumberOfPasswds: str = ""       #y or n 
 
 
 def CountLetters(wordList, position):
-    first_letters = [word[position].upper() for word in wordList if word]  # Extracting first letters and converting to uppercase
+    first_letters = [word[position].upper() for word in wordList if word]  # Extracting letters and converting to uppercase
     letter_counts = Counter(first_letters)
     return letter_counts
 
@@ -75,26 +76,34 @@ while(intCheck!=intPW):
         filtered_pw = [strPW for strPW in lsPW if strPW[intCheck] == str(A)]
         lsPW = filtered_pw
         intCheck += 1
-        numberOfPasswds+=1
     else:
         print("an error occured, please try again")
+
 
 print("POSSIBLE PASSWORDS:\n")
 for strPW in lsPW:
     print(strPW + '\n')
+    numberOfPasswds += 1
 
+print(f"Number of passwords: {numberOfPasswds}")
 
 intCheck = 0
+
 while(intCheck!=intPW):
     # Count occurrences of first letters
     letterOccurrences = CountLetters(lsPW, intCheck)
     
+    #sorting by num of occurences
+    sortedOccurrences = sorted(letterOccurrences.items(), key=lambda x: x[1], reverse=True)
+    
     # Display the occurrences
     print(f"\nNumber of occurences of certain numbers on position {intCheck+1}:")
-    for letter, count in sorted(letterOccurrences.items()):
+    
+    for letter, count in sorted(sortedOccurrences):
         print(f"{letter}: {count}")
         
     del(letterOccurrences)
+    del(sortedOccurrences)
     intCheck+=1
 
 
